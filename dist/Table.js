@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var AdapterFactory_1 = require("./AdapterFactory");
 var Column_1 = require("./Column");
-var default_1 = (function () {
+var default_1 = /** @class */ (function () {
     /**
      * A representation of a Database Table.
      *
@@ -49,7 +49,9 @@ var default_1 = (function () {
         this.name = name;
         this.schema = schema;
         var interfaceNamePattern = config.interfaceNameFormat || '${table}Entity';
-        this.interfaceName = interfaceNamePattern.replace('${table}', this.name.replace(' ', '_'));
+        //this.interfaceName = interfaceNamePattern.replace('${table}', this.name.replace(' ', '_'))
+        var name = this.name.substr(0, this.name.length - 1);
+        this.interfaceName = 'I' + name.charAt(0).toUpperCase() + name.slice(1);
     }
     /**
      * Queries the database and generates the Column definitions for this table.
@@ -80,7 +82,7 @@ var default_1 = (function () {
      */
     default_1.prototype.stringify = function (includeSchema) {
         var schemaSpaces = includeSchema ? '  ' : '';
-        return schemaSpaces + "export interface " + this.interfaceName + " {\n" + this.columns.map(function (c) { return schemaSpaces + "  " + c.stringify(); }).join('\n') + "\n" + schemaSpaces + "}";
+        return schemaSpaces + " interface " + this.interfaceName + " {\n" + this.columns.map(function (c) { return schemaSpaces + "  " + c.stringify(); }).join('\n') + "\n" + schemaSpaces + "}";
     };
     /**
      * This Table as a plain JavaScript object.

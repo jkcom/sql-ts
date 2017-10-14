@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var TypeMap_1 = require("./TypeMap");
-var default_1 = (function () {
+var default_1 = /** @class */ (function () {
     /**
      * A representation of a database column.
      *

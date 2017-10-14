@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var AdapterFactory_1 = require("./AdapterFactory");
 var Table_1 = require("./Table");
-var default_1 = (function () {
+var default_1 = /** @class */ (function () {
     function default_1() {
         /**
          * The Tables that this Database contains.

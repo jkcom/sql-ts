@@ -42,7 +42,8 @@ export default class {
     this.schema = schema
     const interfaceNamePattern = config.interfaceNameFormat || '${table}Entity'
     //this.interfaceName = interfaceNamePattern.replace('${table}', this.name.replace(' ', '_'))
-    this.interfaceName = 'I' + this.name.substr(0, this.name.length -1).charAt(0).toUpperCase() + string.slice(1);
+    var name = this.name.substr(0, this.name.length -1)
+    this.interfaceName = 'I' + name.charAt(0).toUpperCase() + name.slice(1);
   }
   /**
    * Queries the database and generates the Column definitions for this table.
