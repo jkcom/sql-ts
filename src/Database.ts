@@ -50,7 +50,7 @@ export default class {
       for (let schema in tablesBySchemas) {
         const tables = tablesBySchemas[schema]
         let schemaName = config.forceNamespace || schema
-        namespaces.push(`export namespace ${schemaName} {
+        namespaces.push(`declare namespace ${schemaName} {
 ${tables.map(t => t.stringify(includeSchema)).join('\n\n')}
 }`)
       }

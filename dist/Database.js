@@ -106,7 +106,7 @@ var default_1 = /** @class */ (function () {
             for (var schema in tablesBySchemas) {
                 var tables = tablesBySchemas[schema];
                 var schemaName = config.forceNamespace || schema;
-                namespaces.push("export namespace " + schemaName + " {\n" + tables.map(function (t) { return t.stringify(includeSchema); }).join('\n\n') + "\n}");
+                namespaces.push("declare namespace " + schemaName + " {\n" + tables.map(function (t) { return t.stringify(includeSchema); }).join('\n\n') + "\n}");
             }
             return namespaces.join('\n\n');
         }
