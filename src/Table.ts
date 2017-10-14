@@ -41,7 +41,8 @@ export default class {
     this.name = name
     this.schema = schema
     const interfaceNamePattern = config.interfaceNameFormat || '${table}Entity'
-    this.interfaceName = interfaceNamePattern.replace('${table}', this.name.replace(' ', '_'))
+    //this.interfaceName = interfaceNamePattern.replace('${table}', this.name.replace(' ', '_'))
+    this.interfaceName = 'I' + this.name.substr(0, this.name.length -1).charAt(0).toUpperCase() + string.slice(1);
   }
   /**
    * Queries the database and generates the Column definitions for this table.
@@ -60,7 +61,7 @@ export default class {
    */
   stringify (includeSchema: boolean): string {
     const schemaSpaces = includeSchema ? '  ' : ''
-    return `${schemaSpaces}export interface ${this.interfaceName} {
+    return `${schemaSpaces} interface ${this.interfaceName} {
 ${this.columns.map(c => `${schemaSpaces}  ` + c.stringify()).join('\n')}
 ${schemaSpaces}}`
   }
