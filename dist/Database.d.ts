@@ -27,7 +27,7 @@ export default class  {
      *
      * @returns {string}
      */
-    stringify(includeSchema: boolean): string;
+    stringify(config: Config): string;
     /**
      * This Database as a plain JavaScript object.
      *

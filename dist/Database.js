@@ -91,8 +91,9 @@ var default_1 = /** @class */ (function () {
      *
      * @returns {string}
      */
-    default_1.prototype.stringify = function (includeSchema) {
-        if (includeSchema) {
+    default_1.prototype.stringify = function (config) {
+        var includeSchema = Boolean(config.schemaAsNamespace || config.forceNamespace);
+        if (config.schemaAsNamespace) {
             var tablesBySchemas = {};
             for (var _i = 0, _a = this.tables; _i < _a.length; _i++) {
                 var table = _a[_i];
@@ -104,7 +105,8 @@ var default_1 = /** @class */ (function () {
             var namespaces = [];
             for (var schema in tablesBySchemas) {
                 var tables = tablesBySchemas[schema];
-                namespaces.push("export namespace " + schema + " {\n" + tables.map(function (t) { return t.stringify(includeSchema); }).join('\n\n') + "\n}");
+                var schemaName = config.forceNamespace || schema;
+                namespaces.push("export namespace " + schemaName + " {\n" + tables.map(function (t) { return t.stringify(includeSchema); }).join('\n\n') + "\n}");
             }
             return namespaces.join('\n\n');
         }

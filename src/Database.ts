@@ -36,8 +36,9 @@ export default class {
    * 
    * @returns {string} 
    */
-  stringify (includeSchema: boolean): string {
-    if (includeSchema) {
+  stringify (config: Config): string {
+    const includeSchema = Boolean(config.schemaAsNamespace || config.forceNamespace)
+    if (config.schemaAsNamespace) {
       const tablesBySchemas: { [schema: string]: Table[] } = {}
       for (let table of this.tables) {
         if (!tablesBySchemas.hasOwnProperty(table.schema)) {
@@ -48,7 +49,8 @@ export default class {
       const namespaces: string[] = []
       for (let schema in tablesBySchemas) {
         const tables = tablesBySchemas[schema]
-        namespaces.push(`export namespace ${schema} {
+        let schemaName = config.forceNamespace || schema
+        namespaces.push(`export namespace ${schemaName} {
 ${tables.map(t => t.stringify(includeSchema)).join('\n\n')}
 }`)
       }
